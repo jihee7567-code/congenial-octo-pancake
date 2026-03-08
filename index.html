@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>학교 시간표 생성기</title>
+
+<style>
+
+body{
+font-family:sans-serif;
+text-align:center;
+background:#f4f6f8;
+}
+
+.container{
+background:white;
+padding:20px;
+margin:20px auto;
+width:320px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+input{
+width:90%;
+padding:8px;
+margin:5px;
+}
+
+button{
+padding:10px;
+margin-top:10px;
+width:100%;
+background:#4CAF50;
+color:white;
+border:none;
+border-radius:5px;
+}
+
+table{
+margin:20px auto;
+border-collapse:collapse;
+}
+
+td,th{
+border:1px solid #444;
+padding:8px;
+width:70px;
+text-align:center;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>시간표 생성기</h2>
+
+<input id="name" placeholder="이름"><br>
+
+<input id="A" placeholder="A타임"><br>
+<input id="B" placeholder="B타임"><br>
+<input id="C" placeholder="C타임"><br>
+<input id="D" placeholder="D타임"><br>
+<input id="E" placeholder="E타임"><br>
+
+<button onclick="make()">시간표 생성</button>
+
+</div>
+
+<div id="table"></div>
+
+<script>
+
+function make(){
+
+let subjects={
+"A":document.getElementById("A").value,
+"B":document.getElementById("B").value,
+"C":document.getElementById("C").value,
+"D":document.getElementById("D").value,
+"E":document.getElementById("E").value
+}
+
+let timetable=[
+["A","확통","영독","C","논글","D","E"],
+["D","A","화작","가과","여지","B","C"],
+["C","여지","화작","확통","B","스생",""],
+["B","화작","진로","D","E","여지",""],
+["가과","E","A","영독","","",""]
+]
+
+let days=["월","화","수","목","금"]
+
+let html="<table>"
+html+="<tr><th></th>"
+
+for(let d of days){
+html+="<th>"+d+"</th>"
+}
+
+html+="</tr>"
+
+for(let i=0;i<7;i++){
+
+html+="<tr>"
+html+="<th>"+(i+1)+"교시</th>"
+
+for(let j=0;j<5;j++){
+
+let subject=timetable[j][i]
+
+if(subjects[subject]) subject=subjects[subject]
+
+if(subject=="") subject="-"
+
+html+="<td>"+subject+"</td>"
+}
+
+html+="</tr>"
+
+}
+
+html+="</table>"
+
+document.getElementById("table").innerHTML=html
+
+}
+
+</script>
+
+</body>
+</html>
